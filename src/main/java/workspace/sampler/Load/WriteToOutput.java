@@ -1,2 +1,4 @@
-package workspace.sampler.Load;public interface WriteToOutput {
+package workspace.sampler.Load;
+
+public interface WriteToOutput {
 }
