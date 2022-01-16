@@ -3,18 +3,17 @@ package workspace.sampler.Load;
 import workspace.sampler.bootStrap.Data;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 @Data
-public class splitLargeFile {
+public class SplitLargeFile {
     private List<Map<?, ?>> data;
-    private  int numberOfLines;
+    private int numberOfLines;
 
-    public splitLargeFile(List<Map<?, ?>> data, int numberOfLines) {
+    public SplitLargeFile(List<Map<?, ?>> data, int numberOfLines) {
         this.data = data;
         this.numberOfLines = numberOfLines;
     }
@@ -29,14 +28,13 @@ public class splitLargeFile {
             FileWriter newFilesNames = new FileWriter("C:\\Users\\נועם\\TheFrequentSampler\\src\\main\\resources" +
                     "\\FileNumber" + j + ".csv");
             BufferedWriter out = new BufferedWriter(newFilesNames);
-            if(lines >= this.numberOfLines){
+            if (lines >= this.numberOfLines) {
                 currentLines = this.numberOfLines;
-            }
-            else{
+            } else {
                 currentLines = lines;
             }
-            for (i = i + 1; i <= (j*currentLines); i++){
-                if(i != (j*lines)){
+            for (i = i + 1; i <= (j * currentLines); i++) {
+                if (i != (j * lines)) {
                     out.write(this.data.get(i).toString());
                     out.newLine();
                 }

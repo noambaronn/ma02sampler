@@ -1,10 +1,7 @@
 package workspace.sampler;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +9,7 @@ import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import workspace.sampler.Load.splitLargeFile;
+import workspace.sampler.Load.SplitLargeFile;
 
 
 public class Parser {
@@ -24,7 +21,7 @@ public class Parser {
            // List<Map<?, ?>> data = readObjectsFromCsv(input);
             List<Map<?, ?>> data = readObjectsFromCsv(input);
             System.out.println(data.get(0).toString());
-            splitLargeFile split = new splitLargeFile(data, 500);
+            SplitLargeFile split = new SplitLargeFile(data, 500);
             split.splitFiles();
             //writeAsJson(data, output);
         }
