@@ -40,7 +40,7 @@ public class SplitLargeFile {
         return jsonArray;
     }
 
-    public void splitIntoSmallerFiles(JSONArray jsonArray) throws IOException {
+    public void splitIntoSmallerJsonFiles(JSONArray jsonArray) throws IOException {
         int i=0;
         int files = this.data.size() / this.numberOfLines +
                 this.data.size() % this.numberOfLines;

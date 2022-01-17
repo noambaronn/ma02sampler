@@ -11,6 +11,6 @@ public class JsonOutput implements WriteToOutput{
     public void writeInOutput(List<Map<?, ?>> data, int numberOfLines, String objectType) throws IOException {
         SplitLargeFile split = new SplitLargeFile (data, numberOfLines);
         JSONArray jsonArray = split.listToJsonArray(objectType);
-        split.splitIntoSmallerFiles(jsonArray);
+        split.splitIntoSmallerJsonFiles(jsonArray);
     }
 }
