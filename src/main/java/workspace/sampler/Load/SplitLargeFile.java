@@ -1,5 +1,7 @@
 package workspace.sampler.Load;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import workspace.sampler.bootStrap.Data;
 
 import java.io.BufferedWriter;
@@ -18,29 +20,53 @@ public class SplitLargeFile {
         this.numberOfLines = numberOfLines;
     }
 
-    public void splitFiles() throws IOException {
-        int i = 0;
+    public JSONArray listToJsonArray(String keyObject) {
+        JSONArray jsonArray = new JSONArray();
+        for (Map<?, ?> map : this.data) {
+            JSONObject jsonObjectDetails = new JSONObject();
+            JSONObject jsonObject = new JSONObject();
+            for (Map.Entry<?, ?> entry : map.entrySet()) {
+                String key = String.valueOf(entry.getKey());
+                Object value = entry.getValue();
+                try {
+                    jsonObjectDetails.put(key, value);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            jsonObject.put(keyObject, jsonObjectDetails);
+            jsonArray.add(jsonObject);
+        }
+        return jsonArray;
+    }
+
+    public void splitIntoSmallerFiles(JSONArray jsonArray) throws IOException {
+        int i=0;
         int files = this.data.size() / this.numberOfLines +
                 this.data.size() % this.numberOfLines;
         int lines = this.data.size();
         int currentLines;
         for (int j = 1; j <= files; j++) {
             FileWriter newFilesNames = new FileWriter("C:\\Users\\נועם\\TheFrequentSampler\\src\\main\\resources" +
-                    "\\FileNumber" + j + ".csv");
+                    "\\FileNumber" + j + ".json");
             BufferedWriter out = new BufferedWriter(newFilesNames);
             if (lines >= this.numberOfLines) {
                 currentLines = this.numberOfLines;
             } else {
                 currentLines = lines;
             }
-            for (i = i + 1; i <= (j * currentLines); i++) {
-                if (i != (j * lines)) {
-                    out.write(this.data.get(i).toString());
+            out.write("[");
+            for (i = 1; i <= currentLines; i++) {
+                out.write(jsonArray.get(i).toString());
+                if(i != currentLines){
+                    out.write(",");
                     out.newLine();
                 }
             }
             lines = lines - this.numberOfLines;
+            out.write("]");
             out.close();
         }
     }
 }
+

@@ -10,10 +10,11 @@ import java.util.List;
 import java.util.Map;
 
 public class CsvParser implements ReadFromInput{
-    public List<Map<?, ?>> readObjectsFromCsv(File file) throws IOException {
-        CsvSchema bootstrap = CsvSchema.emptySchema().withHeader();
+    @Override
+    public List<Map<?, ?>> readObjectsFromInputFile(File file) throws IOException {
+        CsvSchema csvSchema = CsvSchema.emptySchema().withHeader();
         CsvMapper csvMapper = new CsvMapper();
-        MappingIterator<Map<?, ?>> mappingIterator = csvMapper.reader(Map.class).with(bootstrap).readValues(file);
+        MappingIterator<Map<?, ?>> mappingIterator = csvMapper.reader(Map.class).with(csvSchema).readValues(file);
 
         return mappingIterator.readAll();
     }
