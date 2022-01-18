@@ -5,5 +5,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface TransformData {
-    public List<Map<?,?>> MakeChangesToData(List<Map<?,?>> data) throws IOException;
+    public List<Map<String, String>> MakeChangesToData(List<Map<String, String>> data) throws IOException ;
 }
