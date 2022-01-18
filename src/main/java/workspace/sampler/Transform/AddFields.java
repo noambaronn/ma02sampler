@@ -39,8 +39,8 @@ public class AddFields implements TransformData{
                 map.put("healthCareName", healthCareName);
                 dataAfterAddedFileds.add(map);
             } catch (InvalidIdException e) {
-                e.printStackTrace();
                 //do not add the map to my transformed data
+                e.printStackTrace();
             }
         }
         return dataAfterAddedFileds;
