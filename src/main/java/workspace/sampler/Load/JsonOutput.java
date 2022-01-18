@@ -8,8 +8,9 @@ import java.util.Map;
 
 public class JsonOutput implements WriteToOutput{
     @Override
-    public void writeInOutput(List<Map<?, ?>> data, int numberOfLines, String objectType) throws IOException {
-        SplitLargeFile split = new SplitLargeFile (data, numberOfLines);
+    //this function writes to the json files but only 50000 lines to each file
+    public void writeInOutput(List<Map<String, String>> data, int numberOfLines, String objectType) throws IOException {
+        SplitLargeJsonFile split = new SplitLargeJsonFile(data, numberOfLines);
         JSONArray jsonArray = split.listToJsonArray(objectType);
         split.splitIntoSmallerJsonFiles(jsonArray);
     }
