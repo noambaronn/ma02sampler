@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface ReadFromInput {
-    public List<Map<?, ?>> readObjectsFromInputFile(File file) throws IOException;
+    public List<Map<String, String>> readObjectsFromInputFile(File file) throws IOException;
 }
