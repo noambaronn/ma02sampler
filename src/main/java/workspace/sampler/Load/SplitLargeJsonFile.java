@@ -53,22 +53,38 @@ public class SplitLargeJsonFile {
             FileWriter newFilesNames = new FileWriter("C:\\Users\\נועם\\TheFrequentSampler\\src\\main\\resources" +
                     "\\JsonFileNumber" + j + ".json");
             BufferedWriter out = new BufferedWriter(newFilesNames);
-            if (lines >= this.numberOfLines) {
-                currentLines = this.numberOfLines;
-            } else {
-                currentLines = lines;
-            }
-            out.write("[");
-            for (i = 1; i <= currentLines; i++) {
-                out.write(jsonArray.get(i).toString());
-                if(i != currentLines){
-                    out.write(",");
-                    out.newLine();
+            if (this.numberOfLines > jsonArray.size()) {
+                for (i = 1; i <= jsonArray.size(); i++) {
+                    out.write(jsonArray.get(i).toString());
+                    if (i != jsonArray.size()) {
+                        out.write(",");
+                        out.newLine();
+                    }
                 }
+                out.write("]");
+                out.close();
             }
-            lines = lines - this.numberOfLines;
-            out.write("]");
-            out.close();
+            else{
+                if (lines >= this.numberOfLines) {
+                    currentLines = this.numberOfLines;
+                } else {
+                    currentLines = lines;
+                }
+                out.write("[");
+                if (this.numberOfLines > jsonArray.size()) {
+
+                }
+                for (i = 1; i <= currentLines; i++) {
+                    out.write(jsonArray.get(i).toString());
+                    if (i != currentLines) {
+                        out.write(",");
+                        out.newLine();
+                    }
+                }
+                lines = lines - this.numberOfLines;
+                out.write("]");
+                out.close();
+            }
         }
     }
 }
